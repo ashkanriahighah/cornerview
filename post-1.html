@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Take on Bitcoin This Week — Corner View</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .paywall {
+      position: relative;
+      margin-top: 40px;
+    }
+
+    .paywall-fade {
+      position: relative;
+      max-height: 120px;
+      overflow: hidden;
+    }
+
+    .paywall-fade::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 120px;
+      background: linear-gradient(to bottom, transparent, #faf9f7);
+    }
+
+    .paywall-box {
+      border: 1px solid #e8e6e1;
+      border-radius: 6px;
+      padding: 36px 40px;
+      text-align: center;
+      margin-top: 32px;
+      background: #fff;
+    }
+
+    .paywall-box h3 {
+      font-size: 20px;
+      font-weight: normal;
+      margin-bottom: 10px;
+    }
+
+    .paywall-box p {
+      font-size: 15px;
+      color: #666;
+      margin-bottom: 24px;
+    }
+
+    .paywall-form {
+      display: flex;
+      gap: 0;
+      max-width: 400px;
+      margin: 0 auto;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .paywall-form input {
+      flex: 1;
+      padding: 12px 16px;
+      border: none;
+      font-size: 15px;
+      background: #fff;
+      outline: none;
+      font-family: inherit;
+    }
+
+    .paywall-form button {
+      padding: 12px 22px;
+      background: #1a1a1a;
+      color: #fff;
+      border: none;
+      font-size: 15px;
+      cursor: pointer;
+      font-family: inherit;
+      white-space: nowrap;
+    }
+
+    .paywall-form button:hover {
+      background: #333;
+    }
+
+    .at-a-glance {
+      background: #f5f4f0;
+      border-radius: 6px;
+      padding: 24px 28px;
+      margin: 32px 0;
+    }
+
+    .at-a-glance h4 {
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #888;
+      margin-bottom: 16px;
+    }
+
+    .at-a-glance table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 15px;
+    }
+
+    .at-a-glance td {
+      padding: 6px 0;
+      border-bottom: 1px solid #e8e6e1;
+    }
+
+    .at-a-glance td:last-child {
+      text-align: right;
+      color: #555;
+    }
+
+    .at-a-glance tr:last-child td {
+      border-bottom: none;
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html" class="nav-logo">Corner View</a>
+    <ul class="nav-links">
+      <li><a href="thoughts.html">Thoughts</a></li>
+      <li><a href="about.html">About</a></li>
+    </ul>
+  </nav>
+
+  <div class="post-container">
+
+    <div class="post-header">
+      <div class="post-date">17–24 JUNE 2026</div>
+      <h1>My Take on Bitcoin This Week</h1>
+      <p class="post-intro">
+        A personal view on a brutal week — and why I find myself more interested than scared.
+      </p>
+    </div>
+
+    <img class="post-cover" src="post1.jpg" alt="Bitcoin Weekly Analysis" />
+
+    <div class="post-body">
+
+      <p>
+        I'll be honest with you: this was not a fun week to be watching Bitcoin. And yet, sitting here on 24 June,
+        I find myself more interested in what just happened than I am scared of it. Let me tell you why.
+      </p>
+
+      <h2>The Week That Rattled Everyone</h2>
+
+      <p>
+        Bitcoin bled from around $67,000 down to a hair above $59,000. That's a gut-punch move, and the
+        liquidation cascades — over $600 million wiped across crypto — made it feel worse than the numbers
+        alone suggest. On Monday the 23rd, BTC shed over $2,500 in a single session, breaking below a
+        trendline that had been holding since the June 5 rebound. The head-and-shoulders pattern on the
+        4-hour chart that technicians had been nervously watching all week finally confirmed, pointing toward
+        $57,500 as the next logical target. I won't pretend that's not a real risk.
+      </p>
+
+      <p>
+        But here's what I keep coming back to: this didn't happen in a vacuum, and it didn't happen because
+        something broke inside Bitcoin itself.
+      </p>
+
+      <div class="at-a-glance">
+        <h4>At a Glance</h4>
+        <table>
+          <tr><td>BTC Week Range</td><td>$59,000 – $67,000</td></tr>
+          <tr><td>Liquidations (week)</td><td>>$600M</td></tr>
+          <tr><td>ETF Outflows (June)</td><td>>$2.8B</td></tr>
+          <tr><td>Strategy STRC Low</td><td>$82.53 (vs $100 par)</td></tr>
+          <tr><td>Fear & Greed Index</td><td>23 — Extreme Fear</td></tr>
+          <tr><td>H&S Target</td><td>~$57,500</td></tr>
+        </table>
+      </div>
+
+    </div>
+
+    <!-- PAYWALL -->
+    <div class="paywall">
+      <div class="paywall-fade">
+        <p style="color:#555; line-height:1.8;">
+          The selloff was driven by a genuinely terrible combination of external forces stacking on top of
+          each other. The Fed has turned hawkish again — nine FOMC members now expect rate hikes
+          in 2026 — which is the single worst macro backdrop for a speculative asset like Bitcoin...
+        </p>
+      </div>
+
+      <div class="paywall-box">
+        <h3>Read the full analysis</h3>
+        <p>Enter your email to download the complete PDF — free, no subscription required.</p>
+        <form class="paywall-form" onsubmit="handleDownload(event)">
+          <input type="email" placeholder="Your email address" required />
+          <button type="submit">↓ Download PDF</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- AUTHOR BOX -->
+    <div class="author-box">
+      <img src="profile.jpg" alt="Ashkan Riahighah" />
+      <div class="author-info">
+        <h4>Ashkan Riahighah</h4>
+        <div class="author-title">Research Analyst · Crypto & Asset Management</div>
+        <p>
+          Iranian researcher passionate about financial markets and digital assets.
+          Writing weekly to share independent analysis on what matters in crypto.
+        </p>
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    <span>© 2026 Corner View</span>
+    <a href="mailto:ashkan7riahi@gmail.com">ashkan7riahi@gmail.com</a>
+  </footer>
+
+  <script>
+    function handleDownload(e) {
+      e.preventDefault();
+      const email = e.target.querySelector('input').value;
+      // ایمیل ذخیره میشه و PDF دانلود میشه
+      console.log('Email captured:', email);
+      window.location.href = 'cornerview-bitcoin-june24-2026.pdf';
+    }
+  </script>
+
+</body>
+</html>
