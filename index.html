@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Corner View</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* TICKER */
+    .ticker-bar {
+      background: #1a1a1a;
+      color: #fff;
+      padding: 10px 0;
+      overflow: hidden;
+      font-size: 13px;
+      letter-spacing: 0.04em;
+    }
+
+    .ticker-track {
+      display: flex;
+      gap: 60px;
+      animation: ticker-scroll 30s linear infinite;
+      white-space: nowrap;
+    }
+
+    .ticker-track:hover {
+      animation-play-state: paused;
+    }
+
+    .ticker-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .ticker-item .name {
+      color: #aaa;
+    }
+
+    .ticker-item .price {
+      color: #fff;
+      font-weight: bold;
+    }
+
+    .ticker-item .change.up {
+      color: #4caf50;
+    }
+
+    .ticker-item .change.down {
+      color: #f44336;
+    }
+
+    @keyframes ticker-scroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* QUOTE ROTATOR */
+    .quote-section {
+      background: #1a1a1a;
+      padding: 48px 40px;
+      text-align: center;
+      margin-bottom: 80px;
+    }
+
+    .quote-rotator {
+      max-width: 680px;
+      margin: 0 auto;
+      position: relative;
+      min-height: 60px;
+    }
+
+    .quote-slide {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      opacity: 0;
+      transition: opacity 0.8s ease;
+      font-size: 20px;
+      color: #fff;
+      font-style: italic;
+      line-height: 1.6;
+      font-family: 'Georgia', serif;
+    }
+
+    .quote-slide.active {
+      opacity: 1;
+      position: relative;
+    }
+
+    .quote-dots {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 20px;
+    }
+
+    .quote-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #555;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .quote-dot.active {
+      background: #fff;
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html" class="nav-logo">Corner View</a>
+    <ul class="nav-links">
+      <li><a href="thoughts.html">Thoughts</a></li>
+      <li><a href="about.html">About</a></li>
+    </ul>
+  </nav>
+
+  <!-- TICKER -->
+  <div class="ticker-bar">
+    <div class="ticker-track" id="tickerTrack">
+      <!-- filled by JS -->
+    </div>
+  </div>
+
+  <section class="hero">
+    <h1>Weekly thoughts on markets & crypto</h1>
+    <p>Independent research and analysis, published every week. No noise, just signal.</p>
+    <form class="subscribe-form" onsubmit="handleSubscribe(event)">
+      <input type="email" placeholder="Your email address" required />
+      <button type="submit">Subscribe</button>
+    </form>
+  </section>
+
+  <!-- QUOTE ROTATOR -->
+  <div class="quote-section">
+    <div class="quote-rotator" id="quoteRotator">
+      <div class="quote-slide active">"Crypto is where uncertainty creates opportunity."</div>
+      <div class="quote-slide">"Focus is the skill that separates traders from spectators."</div>
+      <div class="quote-slide">"Patience turns noise into opportunity."</div>
+      <div class="quote-slide">"Big profits are usually built in the long run, not found overnight."</div>
+      <div class="quote-slide">"Trading isn't hard to learn; mastering patience is the real challenge."</div>
+    </div>
+    <div class="quote-dots" id="quoteDots"></div>
+  </div>
+
+  <div class="section-label">Latest thoughts</div>
+
+  <div class="posts-grid">
+    <a href="post-1.html" class="post-card">
+      <img src="post1.jpg" alt="Bitcoin Weekly" />
+      <div class="post-date">17–24 JUNE 2026</div>
+      <h3>My Take on Bitcoin This Week</h3>
+      <p>A brutal week — and why I find myself more interested than scared.</p>
+    </a>
+  </div>
+
+  <footer>
+    <span>© 2026 Corner View</span>
+    <a href="mailto:ashkan7riahi@gmail.com">ashkan7riahi@gmail.com</a>
+  </footer>
+
+  <script>
+    // SUBSCRIBE
+    function handleSubscribe(e) {
+      e.preventDefault();
+      const input = e.target.querySelector('input');
+      alert('Thank you! ' + input.value + ' has been subscribed.');
+      input.value = '';
+    }
+
+    // TICKER
+    const coins = ['BTC', 'ETH', 'SOL', 'BNB', 'XRP'];
+    async function fetchPrices() {
+      try {
+        const ids = 'bitcoin,ethereum,solana,binancecoin,ripple';
+        const res = await fetch(`https://api.coingecko.com/api/v3/simple/price?ids=${ids}&vs_currencies=usd&include_24hr_change=true`);
+        const data = await res.json();
+        const map = {
+          BTC: data.bitcoin,
+          ETH: data.ethereum,
+          SOL: data.solana,
+          BNB: data.binancecoin,
+          XRP: data.ripple
+        };
+        let html = '';
+        for (let i = 0; i < 2; i++) {
+          for (const [symbol, info] of Object.entries(map)) {
+            if (!info) continue;
+            const change = info.usd_24h_change?.toFixed(2);
+            const dir = change >= 0 ? 'up' : 'down';
+            const arrow = change >= 0 ? '▲' : '▼';
+            html += `<span class="ticker-item">
+              <span class="name">${symbol}</span>
+              <span class="price">$${info.usd.toLocaleString()}</span>
+              <span class="change ${dir}">${arrow} ${Math.abs(change)}%</span>
+            </span>`;
+          }
+        }
+        document.getElementById('tickerTrack').innerHTML = html;
+      } catch (e) {
+        document.getElementById('tickerTrack').innerHTML =
+          '<span class="ticker-item"><span class="name">Live prices temporarily unavailable</span></span>';
+      }
+    }
+    fetchPrices();
+    setInterval(fetchPrices, 60000);
+
+    // QUOTE ROTATOR
+    const slides = document.querySelectorAll('.quote-slide');
+    const dotsContainer = document.getElementById('quoteDots');
+    let current = 0;
+
+    slides.forEach((_, i) => {
+      const dot = document.createElement('div');
+      dot.className = 'quote-dot' + (i === 0 ? ' active' : '');
+      dot.onclick = () => goTo(i);
+      dotsContainer.appendChild(dot);
+    });
+
+    function goTo(n) {
+      slides[current].classList.remove('active');
+      dotsContainer.children[current].classList.remove('active');
+      current = n;
+      slides[current].classList.add('active');
+      dotsContainer.children[current].classList.add('active');
+    }
+
+    setInterval(() => {
+      goTo((current + 1) % slides.length);
+    }, 4000);
+  </script>
+
+</body>
+</html>
